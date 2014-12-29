@@ -20,7 +20,7 @@ public class DbConfiguration {
     {
         final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
 //        dsLookup.setResourceRef(true);
-        final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/MyLocalDBe");
+        final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/MyLocalDB");
         return dataSource;
     }
 }

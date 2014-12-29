@@ -2,8 +2,8 @@ package com.ventura24.nlp2.webapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
@@ -15,8 +15,8 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  */
 @EnableWebMvc
 @Configuration
-@Import({ Security.class , DbConfiguration.class})
-public class WebConfiguration {
+
+public class WebConfiguration extends WebMvcConfigurerAdapter{
 
     /*
     @Bean
@@ -33,7 +33,7 @@ public class WebConfiguration {
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views");
+        viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }

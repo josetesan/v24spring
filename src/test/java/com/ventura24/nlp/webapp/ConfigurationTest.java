@@ -1,10 +1,14 @@
 package com.ventura24.nlp.webapp;
 
+import com.ventura24.nlp2.webapp.config.DbConfiguration;
 import com.ventura24.nlp2.webapp.config.WebConfiguration;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mock.jndi.SimpleNamingContextBuilder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -18,7 +22,7 @@ import java.util.Properties;
  * Created by josetesan on 29/12/14.
  */
 
-@ContextConfiguration(classes = WebConfiguration.class)
+@ContextConfiguration(classes = DbConfiguration.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ConfigurationTest {
@@ -26,14 +30,32 @@ public class ConfigurationTest {
     @Autowired
     private DataSource dataSource;
 
-    @Test
-    public void testCanUseDatabase() throws Exception
+    @BeforeClass
+    public static void createMockJndiRealm() throws Exception
     {
-        Connection connection = dataSource.getConnection();
-        Assert.assertNotNull(connection);
+        SimpleNamingContextBuilder builder = new SimpleNamingContextBuilder();
+        DataSource ds = new DriverManagerDataSource("jdbc:oracle:thin://localhost:49161/xe","system","oracle");
+        builder.bind("java:comp/env/jdbc/MyLocalDB", ds);
+        builder.activate();
+    }
 
-        Properties properties = connection.getClientInfo();
-        Assert.assertFalse(properties.isEmpty());
+    @Test
+    public void testCanUseDatabase()
+    {
+        try {
+            Assert.assertNotNull(dataSource);
+
+            Connection connection = dataSource.getConnection();
+            Assert.assertNotNull(connection);
+
+            Properties properties = connection.getClientInfo();
+            Assert.assertFalse(properties.isEmpty());
+
+            connection.close();
+        } catch (final Throwable t)
+        {
+            Assert.fail(t.getMessage());
+        }
 
     }
 }
