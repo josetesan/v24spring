@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 public class DbConfiguration {
 
 
-    @Bean
+    @Bean(name = "dataSource")
     public DataSource dataSource()
     {
         final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
