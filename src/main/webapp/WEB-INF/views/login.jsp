@@ -4,7 +4,7 @@
 <html>
 <head>
   <title>Login Page</title>
-  <link rel="stylesheet" type="text/css" href="<c:url value='/css/nlp2.css'/>"/>
+  <link rel="stylesheet" type="text/css" href="../css/nlp2.css'/>"/>
 </head>
 <body onload='document.loginForm.username.focus();'>
 
