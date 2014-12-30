@@ -69,19 +69,19 @@
             <scope>test</scope>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>javax.servlet.jsp.jstl</groupId>-->
-            <!--<artifactId>javax.servlet.jsp.jstl-api</artifactId>-->
-            <!--<version>1.2.1</version>-->
+            <!--<groupId>taglibs</groupId>-->
+            <!--<artifactId>standard</artifactId>-->
+            <!--<version>1.1.2</version>-->
         <!--</dependency>-->
-        <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
-            <version>1.1.2</version>
-        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -112,6 +112,11 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>3.0.5</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -138,6 +143,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
+                    <url>http://172.17.0.2:8081/manager/text</url>
                     <enableNaming>true</enableNaming>
                     <contextReloadable>true</contextReloadable>
                     <fork>false</fork>

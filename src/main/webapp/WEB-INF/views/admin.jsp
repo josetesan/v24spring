@@ -3,26 +3,21 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <body>
-<h1>Title : ${title}</h1>
-<h1>Message : ${message}</h1>
+<h1><spring:message code="label.title"/> : ${title}</h1>
+<h1><spring:message code="label.message"/> : ${message}</h1>
 
 <c:url value="/j_spring_security_logout" var="logoutUrl" />
 <form action="${logoutUrl}" method="post" id="logoutForm">
-  <input type="hidden" name="${_csrf.parameterName}"
-         value="${_csrf.token}" />
+  <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
 </form>
-<script>
-  function formSubmit() {
-    document.getElementById("logoutForm").submit();
-  }
-</script>
 
 <c:if test="${pageContext.request.userPrincipal.name != null}">
   <h2>
-    Welcome : ${pageContext.request.userPrincipal.name} | <a
-          href="javascript:formSubmit()"> Logout</a>
+    <spring:message code="label.welcome"/> : ${pageContext.request.userPrincipal.name} |
+      <a href="javascript:formSubmit()"> <spring:message code="label.logout"/></a>
   </h2>
 </c:if>
 
+<script>function formSubmit() {     document.getElementById("logoutForm").submit();}</script>
 </body>
 </html>

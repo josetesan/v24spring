@@ -1,26 +1,42 @@
 package com.ventura24.nlp2.webapp.controllers;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.ModelAndView;
+
 
 /**
- * Created by josetesan on 16/12/14.
+ * Created by josetesan on 30/12/14.
  */
 @Controller
-public class LoginController extends WebMvcConfigurerAdapter {
+public class LoginController {
 
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/results").setViewName("results");
-//    }
-
-    @RequestMapping(value="/", method= RequestMethod.GET)
-    public String showForm() {
+    @RequestMapping(value="/login", method= RequestMethod.GET)
+    public String showLogin() {
         return "login";
     }
 
 
+    //for 403 access denied page
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public ModelAndView accesssDenied() {
+
+        ModelAndView model = new ModelAndView();
+
+        //check if user is login
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            model.addObject("username", userDetail.getUsername());
+        }
+
+        model.setViewName("403");
+        return model;
+
+    }
 }
