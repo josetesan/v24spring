@@ -15,12 +15,13 @@ import javax.sql.DataSource;
 public class DbConfiguration {
 
 
-    @Bean(name = "dataSource")
+    @Bean(name = "dataSource",destroyMethod = "")
     public DataSource dataSource()
     {
         final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
 //        dsLookup.setResourceRef(true);
         final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/MyLocalDB");
+
         return dataSource;
     }
 }

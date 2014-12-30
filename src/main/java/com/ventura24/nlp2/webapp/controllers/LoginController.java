@@ -1,6 +1,5 @@
 package com.ventura24.nlp2.webapp.controllers;
 
-import com.sun.javafx.sg.prism.NGShape;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -29,14 +28,6 @@ public class LoginController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
-
-
-//    @RequestMapping(value="/login", method= RequestMethod.POST)
-//    public ModelAndView authenticate(Locale locale, ModelAndView modelAndView) {
-//        LOGGER.info("Arrived /login controller with parameters");
-//        modelAndView.setViewName("admin");
-//        return modelAndView;
-//    }
 
 
     @RequestMapping(value="/success", method = RequestMethod.GET)
