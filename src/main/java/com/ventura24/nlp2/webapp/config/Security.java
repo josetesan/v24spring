@@ -45,7 +45,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                                 .formLogin()
                                         .loginPage("/login")
                                         .failureUrl("/login?error")
-                                        .usernameParameter("j_username").passwordParameter("j_password") // not really needed
+                                        .usernameParameter("username").passwordParameter("password") // not really needed
         //                                .successHandler(savedRequestAwareAuthenticationSuccessHandler())
         //                                .loginProcessingUrl("/auth/login_check")
                         .and()

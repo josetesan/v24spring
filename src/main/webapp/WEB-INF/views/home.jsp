@@ -411,15 +411,15 @@ navegación. Al continuar con su navegacion entendemos que acepta nuestra
 <div class="header customTtl"><b>¿YA ESTÁ REGISTRADO?</b></div>
 <div class="boxContent">
 
-<form name="loginForm" method="post"  action="<spring:url value='j_spring_security_check' />">
+<form name="loginForm" method="post"  action="<spring:url value='/login' />">
 <input name="ip" value="" type="hidden">
 <input name="command" value="login" type="hidden">
 <p>
 <label for="nif">NIF/NIE/Pasaporte:</label>
-<input name="j_username" maxlength="15" id="nif" type="text">
+<input name="username" maxlength="15" id="nif" type="text">
 <label for="pwd">Contraseña:</label>
-<input name="j_password" maxlength="12" id="pwd" value="" autocomplete="off" type="password">
-<label for="remember_me">Recuerdame: </label><input type="checkbox" name="remember-me" />
+<input name="password" maxlength="12" id="pwd" value="" autocomplete="off" type="password">
+<label for="remember-me">Recuerdame: </label><input type="checkbox" name="remember-me" id="remember-me" />
 <br>
 <a href="http://www.ventura24.es/passwordforgottenform.do" class="further small">¿ Olvidó su contraseña?</a></p>
 <button type="submit" class="confirm" id="enterButtonCockpit">Entrar</button>
