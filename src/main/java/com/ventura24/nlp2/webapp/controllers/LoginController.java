@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.sql.DataSource;
-import java.util.Locale;
 
 
 /**
@@ -28,12 +27,6 @@ public class LoginController {
 
     private Logger LOGGER = LoggerFactory.getLogger("LoginController");
 
-//    @RequestMapping(value="/login", method= RequestMethod.GET)
-//    public ModelAndView showLogin(Locale locale, ModelAndView modelAndView) {
-//        LOGGER.info("Arrived /login controller");
-//        modelAndView.setViewName("login");
-//        return modelAndView;
-//    }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accesssDenied() {
