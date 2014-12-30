@@ -1,7 +1,6 @@
 package com.ventura24.nlp.webapp.config;
 
 import com.ventura24.nlp2.webapp.config.DbConfiguration;
-import com.ventura24.nlp2.webapp.config.WebConfiguration;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +15,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.util.Properties;
 
 /**
  * Created by josetesan on 29/12/14.
@@ -31,31 +29,26 @@ public class ConfigurationTest {
     private DataSource dataSource;
 
     @BeforeClass
-    public static void createMockJndiRealm() throws Exception
-    {
+    public static void createMockJndiRealm() throws Exception {
         SimpleNamingContextBuilder builder = new SimpleNamingContextBuilder();
-        DataSource ds = new DriverManagerDataSource("jdbc:oracle:thin://localhost:49161/xe","system","oracle");
+        DataSource ds = new DriverManagerDataSource("jdbc:oracle:thin:@//localhost:49161/xe", "system", "oracle");
         builder.bind("java:comp/env/jdbc/MyLocalDB", ds);
         builder.activate();
     }
 
     @Test
-    public void testCanUseDatabase()
-    {
+    public void testCanUseDatabase() {
         try {
             Assert.assertNotNull(dataSource);
 
             Connection connection = dataSource.getConnection();
             Assert.assertNotNull(connection);
 
-            Properties properties = connection.getClientInfo();
-            Assert.assertFalse(properties.isEmpty());
-
             connection.close();
-        } catch (final Throwable t)
-        {
+        } catch (final Throwable t) {
             Assert.fail(t.getMessage());
         }
 
     }
 }
+

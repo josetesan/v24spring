@@ -12,7 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
 import java.util.Locale;
+import java.util.Properties;
 
 /**
  * Created by josetesan on 16/12/14.
@@ -21,12 +24,13 @@ import java.util.Locale;
 public class HomeController {
 
     private MessageSource messageSource;
+    private DataSource dataSource;
 
     private Logger LOGGER = LoggerFactory.getLogger("HomeController");
 
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String showHome(Locale locale, ModelAndView model) {
-        LOGGER.info("Entering home");
+        LOGGER.info("Entering home ");
         return "home";
     }
 
@@ -34,4 +38,11 @@ public class HomeController {
     public void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
+
+    @Autowired
+    public void setDataSource(DataSource dataSource)    {
+        this.dataSource = dataSource;
+    }
+
+
 }
