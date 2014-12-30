@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
@@ -20,7 +21,6 @@ import java.util.concurrent.TimeUnit;
  */
 @EnableWebMvc
 @Configuration
-
 public class WebConfiguration extends WebMvcConfigurerAdapter{
 
 
@@ -39,12 +39,19 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
     public ViewResolver tilesViewResolver() {
         TilesViewResolver viewResolver = new TilesViewResolver();
         viewResolver.setViewClass(TilesView.class);
-        viewResolver.setPrefix("/WEB-INF/views/pages/");
-        viewResolver.setSuffix(".jsp");
+        viewResolver.setPrefix("/WEB-INF/defs");
+        viewResolver.setSuffix(".xml");
         viewResolver.setOrder(1);
         return viewResolver;
     }
 
+//    @Bean(name="tilesConfigurer")
+//    public TilesConfigurer tilesConfigurer()
+//    {
+//        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+//        tilesConfigurer.setDefinitions("/WEB-INF/defs/tiles.xml");
+//        return tilesConfigurer;
+//    }
 
     @Bean(name="messageSource")
     public MessageSource messageSource()

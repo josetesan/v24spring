@@ -20,7 +20,7 @@
     <div class="msg">${msg}</div>
   </c:if>
 
-  <form name='loginForm'  action="<spring:url value='/j_spring_security_check' />" method='POST'>
+  <form name='loginForm'  action="<spring:url value='j_spring_security_check' />" method='POST'>
     <table>
       <tr>
         <td><spring:message code="label.user"/></td>

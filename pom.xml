@@ -63,6 +63,11 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.10.7</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
@@ -143,7 +148,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://172.17.0.2:8081/manager/text</url>
+                    <url>http://172.17.0.3:8081/manager/text</url>
                     <enableNaming>true</enableNaming>
                     <contextReloadable>true</contextReloadable>
                     <fork>false</fork>

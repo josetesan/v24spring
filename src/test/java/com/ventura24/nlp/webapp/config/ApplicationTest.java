@@ -1,4 +1,4 @@
-package com.ventura24.nlp.webapp;
+package com.ventura24.nlp.webapp.config;
 
 import com.ventura24.nlp2.webapp.config.WebConfiguration;
 import org.junit.Before;

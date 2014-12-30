@@ -1,12 +1,16 @@
 package com.ventura24.nlp2.webapp.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -35,18 +39,38 @@ public class Security extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/admin/**").access("hasRole('it')")
+                .antMatchers("/admin/**")
+                        .access("hasRole('it')")
                 .and()
-                .formLogin()
-                .loginPage("/login").failureUrl("/login?error")
-                .usernameParameter("username").passwordParameter("password")
+                        .formLogin()
+                                .loginPage("/login")
+                                .failureUrl("/login?error")
+                                .usernameParameter("j_username").passwordParameter("j_password") // not really needed
+                                .successHandler(savedRequestAwareAuthenticationSuccessHandler())
+                                .loginProcessingUrl("/auth/login_check")
                 .and()
-                .logout().logoutSuccessUrl("/login?logout")
+                        .logout().logoutSuccessUrl("/login?logout")
                 .and()
-                .rememberMe()
+                        .rememberMe()
+                                .tokenRepository(persistentTokenRepository())
+                                .tokenValiditySeconds(1209600)
                 .and()
-                .exceptionHandling().accessDeniedPage("/403")
+                        .exceptionHandling().accessDeniedPage("/403")
                 .and()
-                .csrf();
+                        .csrf();
+        }
+
+        @Bean
+        public PersistentTokenRepository persistentTokenRepository() {
+                JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+                db.setDataSource(dataSource);
+                return db;
+        }
+
+        @Bean
+        public SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler() {
+                SavedRequestAwareAuthenticationSuccessHandler auth = new SavedRequestAwareAuthenticationSuccessHandler();
+                auth.setTargetUrlParameter("targetUrl");
+                return auth;
         }
 }
