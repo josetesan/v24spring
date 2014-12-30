@@ -38,6 +38,14 @@ public class LoginController {
 //        return modelAndView;
 //    }
 
+
+    @RequestMapping(value="/success", method = RequestMethod.GET)
+    public String enter()
+    {
+        LOGGER.info("Entering /success");
+        return "success";
+    }
+
     //for 403 access denied page
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accesssDenied() {

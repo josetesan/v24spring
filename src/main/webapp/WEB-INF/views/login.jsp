@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <title>Login Page</title>
@@ -20,7 +21,7 @@
     <div class="msg">${msg}</div>
   </c:if>
 
-  <form name='loginForm'  action="<spring:url value='j_spring_security_check' />" method='POST'>
+  <form name='loginForm'  action="<spring:url value='/login' />" method='post'>
     <table>
       <tr>
         <td><spring:message code="label.user"/></td>

@@ -25,11 +25,12 @@ public class HomeController {
     private Logger LOGGER = LoggerFactory.getLogger("HomeController");
 
     @RequestMapping(value="/", method= RequestMethod.GET)
-    public String showHome(Locale locale, ModelAndView model) {
+    public ModelAndView showHome(Locale locale, ModelAndView model) {
         model.addObject("title", messageSource.getMessage("label.home.title",null, locale));
         model.addObject("message", messageSource.getMessage("label.home.msg",null, locale));
+        model.setViewName("home");
         LOGGER.info("Entering home");
-        return "home";
+        return model;
     }
 
     @Autowired
