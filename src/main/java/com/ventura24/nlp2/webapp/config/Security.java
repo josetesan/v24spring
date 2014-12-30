@@ -46,31 +46,31 @@ public class Security extends WebSecurityConfigurerAdapter {
                                 .loginPage("/login")
                                 .failureUrl("/login?error")
                                 .usernameParameter("j_username").passwordParameter("j_password") // not really needed
-                                .successHandler(savedRequestAwareAuthenticationSuccessHandler())
-                                .loginProcessingUrl("/auth/login_check")
+//                                .successHandler(savedRequestAwareAuthenticationSuccessHandler())
+//                                .loginProcessingUrl("/auth/login_check")
                 .and()
                         .logout().logoutSuccessUrl("/login?logout")
-                .and()
-                        .rememberMe()
-                                .tokenRepository(persistentTokenRepository())
-                                .tokenValiditySeconds(1209600)
+//                .and()
+//                        .rememberMe()
+//                                .tokenRepository(persistentTokenRepository())
+//                                .tokenValiditySeconds(1209600)
                 .and()
                         .exceptionHandling().accessDeniedPage("/403")
                 .and()
                         .csrf();
         }
 
-        @Bean
-        public PersistentTokenRepository persistentTokenRepository() {
-                JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
-                db.setDataSource(dataSource);
-                return db;
-        }
-
-        @Bean
-        public SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler() {
-                SavedRequestAwareAuthenticationSuccessHandler auth = new SavedRequestAwareAuthenticationSuccessHandler();
-                auth.setTargetUrlParameter("targetUrl");
-                return auth;
-        }
+//        @Bean
+//        public PersistentTokenRepository persistentTokenRepository() {
+//                JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+//                db.setDataSource(dataSource);
+//                return db;
+//        }
+//
+//        @Bean
+//        public SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler() {
+//                SavedRequestAwareAuthenticationSuccessHandler auth = new SavedRequestAwareAuthenticationSuccessHandler();
+//                auth.setTargetUrlParameter("targetUrl");
+//                return auth;
+//        }
 }

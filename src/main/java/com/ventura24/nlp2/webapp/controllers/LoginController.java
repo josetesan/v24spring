@@ -31,12 +31,12 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value="/login", method= RequestMethod.POST)
-    public ModelAndView authenticate(Locale locale, ModelAndView modelAndView) {
-        LOGGER.info("Arrived /login controller with parameters");
-        modelAndView.setViewName("admin");
-        return modelAndView;
-    }
+//    @RequestMapping(value="/login", method= RequestMethod.POST)
+//    public ModelAndView authenticate(Locale locale, ModelAndView modelAndView) {
+//        LOGGER.info("Arrived /login controller with parameters");
+//        modelAndView.setViewName("admin");
+//        return modelAndView;
+//    }
 
     //for 403 access denied page
     @RequestMapping(value = "/403", method = RequestMethod.GET)

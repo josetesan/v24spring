@@ -34,7 +34,7 @@ public class ConfigurationTest {
     public static void createMockJndiRealm() throws Exception
     {
         SimpleNamingContextBuilder builder = new SimpleNamingContextBuilder();
-        DataSource ds = new DriverManagerDataSource("jdbc:oracle:thin://localhost:49161/xe","system","oracle");
+        DataSource ds = new DriverManagerDataSource("jdbc:oracle:thin:@//localhost:49161/xe","system","oracle");
         builder.bind("java:comp/env/jdbc/MyLocalDB", ds);
         builder.activate();
     }
@@ -47,9 +47,6 @@ public class ConfigurationTest {
 
             Connection connection = dataSource.getConnection();
             Assert.assertNotNull(connection);
-
-            Properties properties = connection.getClientInfo();
-            Assert.assertFalse(properties.isEmpty());
 
             connection.close();
         } catch (final Throwable t)

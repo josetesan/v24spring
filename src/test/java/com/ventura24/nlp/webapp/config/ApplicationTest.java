@@ -2,6 +2,7 @@ package com.ventura24.nlp.webapp.config;
 
 import com.ventura24.nlp2.webapp.config.WebConfiguration;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
         WithSecurityContextTestExecutionListener.class})
+@Ignore
 public class ApplicationTest {
     private MockMvc mvc;
 

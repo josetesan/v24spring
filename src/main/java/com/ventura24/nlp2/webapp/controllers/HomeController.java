@@ -26,6 +26,8 @@ public class HomeController {
 
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String showHome(Locale locale, ModelAndView model) {
+        model.addObject("title", messageSource.getMessage("label.home.title",null, locale));
+        model.addObject("message", messageSource.getMessage("label.home.msg",null, locale));
         LOGGER.info("Entering home");
         return "home";
     }
