@@ -6,7 +6,7 @@
 <h1><spring:message code="label.title"/> : ${title}</h1>
 <h1><spring:message code="label.message"/> : ${message}</h1>
 
-<c:url value="/j_spring_security_logout" var="logoutUrl" />
+<spring:url value="/login?logout" var="logoutUrl" />
 <form action="${logoutUrl}" method="post" id="logoutForm">
   <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
 </form>

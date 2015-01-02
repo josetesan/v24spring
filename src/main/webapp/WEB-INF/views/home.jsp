@@ -9,7 +9,7 @@
 
 <sec:authorize access="hasRole('it')">
   <!-- For login user -->
-  <spring:url value="j_spring_security_logout" var="logoutUrl" />
+  <spring:url value="/login?logout" var="logoutUrl" />
   <form action="${logoutUrl}" method="post" id="logoutForm">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </form>

@@ -8,9 +8,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.sql.DataSource;
 
@@ -19,11 +19,13 @@ import javax.sql.DataSource;
  */
 @EnableWebSecurity
 @Configuration
+@ActiveProfiles("dev")
 public class Security extends WebSecurityConfigurerAdapter {
 
         @Autowired
         private DataSource dataSource;
 
+/*
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
             auth
@@ -32,6 +34,16 @@ public class Security extends WebSecurityConfigurerAdapter {
                     .passwordEncoder(new ShaPasswordEncoder())
                     .usersByUsernameQuery("SELECT LOGIN as username, PASSWORD , ENABLED FROM LM_USERS WHERE LOGIN=?")
                     .groupAuthoritiesByUsername("SELECT LOGIN as username, NAME as role FROM LM_ROLES R, LM_USERS U, LM_USER_ROLES UR WHERE R.LM_ROLE_ID=UR.LM_ROLE_ID AND U.LM_USER_ID = UR.LM_USER_ID AND  LOGIN=?");
+
+        }
+ */
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+                auth
+                        .inMemoryAuthentication()
+                        .withUser("josete").password("almudena").authorities("it")
+                        .and()
+                        .withUser("almudena").password("josete").authorities("mkt");
 
         }
 
@@ -45,7 +57,6 @@ public class Security extends WebSecurityConfigurerAdapter {
                         .formLogin()
                                 .loginPage("/login")
                                 .failureUrl("/403")
-                                .usernameParameter("j_username").passwordParameter("j_password") // not really needed
                                 .defaultSuccessUrl("/admin")
 //                                .successHandler(savedRequestAwareAuthenticationSuccessHandler())
 //                                .loginProcessingUrl("/auth/login_check")
@@ -74,4 +85,14 @@ public class Security extends WebSecurityConfigurerAdapter {
 //                auth.setTargetUrlParameter("targetUrl");
 //                return auth;
 //        }
+/*
+        @Bean(name="userDetailsService")
+        public UserDetailsService userDetailsService()
+        {
+             JdbcDaoImpl userDetailsService = new JdbcDaoImpl();
+             userDetailsService.setDataSource(dataSource);
+             return userDetailsService;
+        }
+        */
+
 }

@@ -2,6 +2,9 @@ package com.ventura24.nlp2.webapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -12,16 +15,27 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
+
 public class DbConfiguration {
 
-
+    // JNDI
     @Bean(name = "dataSource",destroyMethod = "")
-    public DataSource dataSource()
+    @Profile("production")
+    public DataSource prodDataSource()
     {
         final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
-//        dsLookup.setResourceRef(true);
         final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/MyLocalDB");
 
         return dataSource;
+    }
+
+    // Local dev Instance
+    @Bean(name="dataSource")
+    @Profile("dev")
+    public DataSource devDataSource()
+    {
+        return new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.HSQL)
+                .build();
     }
 }
