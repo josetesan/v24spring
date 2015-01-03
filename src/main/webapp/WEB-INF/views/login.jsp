@@ -1,6 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
   <title>Login Page</title>
@@ -20,8 +21,8 @@
   <c:if test="${not empty msg}">
     <div class="msg">${msg}</div>
   </c:if>
-
-  <form name='loginForm'  action="<spring:url value='/login' />" method='post'>
+  <spring:url value='/login' var="loginUrl"/>
+  <form:form name='loginForm'  action="${loginUrl}" method='post'>
     <table>
       <tr>
         <td><spring:message code="label.user"/></td>
@@ -37,7 +38,7 @@
       </tr>
     </table>
     <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
-  </form>
+  </form:form>
 </div>
 
 </body>

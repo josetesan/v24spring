@@ -36,6 +36,10 @@ public class DbConfiguration {
     {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
+                .setScriptEncoding("UTF-8")
+                .ignoreFailedDrops(true)
+                .addScript("classpath:schema.sql")
+                .addScript("classpath:data.sql")
                 .build();
     }
 }

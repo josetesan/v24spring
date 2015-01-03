@@ -2,14 +2,11 @@ package com.ventura24.nlp2.webapp.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Locale;
 
@@ -22,36 +19,69 @@ public class LoginController {
 
     private Logger LOGGER = LoggerFactory.getLogger("LoginController");
 
+
+    /**
+     *
+     * @param logout
+     * @param error
+     * @param locale
+     * @param model
+     * @param principal
+     * @return
+     */
     @RequestMapping(value="/login", method= RequestMethod.GET)
-    public ModelAndView showLogin(Locale locale, ModelAndView modelAndView) {
-        LOGGER.info("Arrived /login controller");
-        modelAndView.setViewName("login");
-        return modelAndView;
+    public String showLogin(@RequestParam(value = "logout", required = false) String logout,
+                            @RequestParam(value="error",required = false) String error,
+                                  Locale locale, Model model) {
+
+
+        LOGGER.info("Arrived /login controller ");
+        if (null != logout)
+        {
+            LOGGER.info("User successfuly logged out");
+            model.addAttribute("msg", "You've been logged out successfully.");
+        }
+        if (null != error)
+        {
+            LOGGER.warn("Invalid  login  , please retry");
+            model.addAttribute("error","Invalid login, please retry");
+        }
+
+
+        return "login";
     }
 
 
+
+/*
     @RequestMapping(value="/success", method = RequestMethod.GET)
     public String enter()
     {
         LOGGER.info("Entering /success");
-        return "success";
-    }
 
-    //for 403 access denied page
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public ModelAndView accesssDenied() {
-        LOGGER.info("Arriving /403 controller");
-        ModelAndView model = new ModelAndView();
-
-        //check if user is login
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
-            model.addObject("username", userDetail.getUsername());
+            LOGGER.info(" success for user {}",userDetail.getUsername());
         }
 
-        model.setViewName("403");
-        return model;
-
+        return "success";
     }
+      */
+    /*
+    @ModelAttribute("webFrameworkList")
+    public List<String> populateWebFrameworkList() {
+
+        //Data referencing for web framework checkboxes
+        List<String> webFrameworkList = new ArrayList<String>();
+        webFrameworkList.add("Spring MVC");
+        webFrameworkList.add("Struts 1");
+        webFrameworkList.add("Struts 2");
+        webFrameworkList.add("JSF");
+        webFrameworkList.add("Apache Tapestry");
+
+        return webFrameworkList;
+    }
+      */
+
 }

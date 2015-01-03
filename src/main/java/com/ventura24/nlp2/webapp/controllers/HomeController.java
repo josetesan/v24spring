@@ -4,14 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.security.Principal;
 import java.util.Locale;
 
 /**
@@ -25,10 +27,18 @@ public class HomeController {
     private Logger LOGGER = LoggerFactory.getLogger("HomeController");
 
     @RequestMapping(value="/", method= RequestMethod.GET)
-    public ModelAndView showHome(Locale locale, ModelAndView model) {
+    public ModelAndView showHome(Locale locale, ModelAndView model,Principal principal) {
         model.addObject("title", messageSource.getMessage("label.home.title",null, locale));
         model.addObject("message", messageSource.getMessage("label.home.msg",null, locale));
         model.setViewName("home");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            LOGGER.info(" success for user {}",userDetail.getUsername());
+            LOGGER.info(" success for user {}",principal.getName());
+        }
+
         LOGGER.info("Entering home");
         return model;
     }
@@ -37,4 +47,5 @@ public class HomeController {
     public void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
+
 }

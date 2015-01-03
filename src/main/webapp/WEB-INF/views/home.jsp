@@ -7,12 +7,20 @@
 <h1><spring:message code="label.title"/> : ${title}</h1>
 <h1><spring:message code="label.message"/> : ${message}</h1>
 
-<sec:authorize access="hasRole('it')">
+<sec:authorize access="isAnonymous()">
+  <a href="<spring:url value="/login"/>">Login</a>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
   <!-- For login user -->
   <spring:url value="/login?logout" var="logoutUrl" />
-  <form action="${logoutUrl}" method="post" id="logoutForm">
+  <form action="${logoutUrl}" method="get" id="logoutForm">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </form>
+
+  <a href="<spring:url value='/game/depot/0'/>">
+    <spring:message code="depot.title" arguments="0"/>
+  </a>
 
   <script>    function formSubmit() {      document.getElementById("logoutForm").submit();    }  </script>
 
