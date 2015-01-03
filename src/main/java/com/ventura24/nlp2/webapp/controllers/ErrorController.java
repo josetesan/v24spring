@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/error", method = RequestMethod.GET)
 public class ErrorController {
 
-    Logger LOGGER = LoggerFactory.getLogger("ErrorController");
+    private static final Logger LOGGER = LoggerFactory.getLogger("ErrorController");
 
     @RequestMapping(value = "/403")
     public String handleError403(Model model)

@@ -23,7 +23,7 @@ import java.util.Locale;
 @RequestMapping(value = "/game/depot")
 public class DepotController {
 
-    private Logger LOGGER = LoggerFactory.getLogger("DepotController");
+    private static final Logger LOGGER = LoggerFactory.getLogger("DepotController");
 
     @Autowired
     private DepotRepository depotRepository;

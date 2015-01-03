@@ -26,7 +26,7 @@ public class HomeController {
 
     private UserDao userDao;
 
-    private Logger LOGGER = LoggerFactory.getLogger("HomeController");
+    private static final Logger LOGGER = LoggerFactory.getLogger("HomeController");
 
     @RequestMapping(value="/", method= RequestMethod.GET)
     public ModelAndView showHome(Locale locale, ModelAndView model,Principal principal) {

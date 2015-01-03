@@ -17,7 +17,7 @@ import java.util.Locale;
 @Controller
 public class LoginController {
 
-    private Logger LOGGER = LoggerFactory.getLogger("LoginController");
+    private static final Logger LOGGER = LoggerFactory.getLogger("LoginController");
 
 
     /**

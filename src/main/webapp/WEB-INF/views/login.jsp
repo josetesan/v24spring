@@ -40,6 +40,6 @@
     <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
   </form:form>
 </div>
-
+ <a href="<spring:url value="/register" />">Register!</a>
 </body>
 </html>
