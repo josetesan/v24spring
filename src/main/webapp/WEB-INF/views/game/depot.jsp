@@ -5,10 +5,13 @@
 <html>
 <head>
     <title>${title}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">
-    <table>
+<div class="table-responsive">
+    <table class="table table-hover">
         <tr>
             <td>Date</td>
             <td>Producto</td>
@@ -24,6 +27,7 @@
         </tr>
         </c:forEach>
     </table>
+    </div>
 
 </sec:authorize>
 <sec:authorize access="isAnonymous()">
