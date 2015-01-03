@@ -5,6 +5,6 @@ package com.ventura24.nlp2.webapp.model;
  */
 public enum Status {
 
-    En_Juego,
-    Terminado
+    JUGANDO,
+    TERMINADO
 }

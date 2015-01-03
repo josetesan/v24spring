@@ -26,7 +26,6 @@ public class LoginController {
      * @param error
      * @param locale
      * @param model
-     * @param principal
      * @return
      */
     @RequestMapping(value="/login", method= RequestMethod.GET)

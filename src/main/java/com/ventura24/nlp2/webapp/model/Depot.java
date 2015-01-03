@@ -18,7 +18,7 @@ public class Depot {
         this.userId = null;
         this.drawDate = new Date();
         this.product = "";
-        this.status = Status.En_Juego;
+        this.status = Status.JUGANDO;
         this.amount = new BigDecimal(0);
     }
 

@@ -26,5 +26,8 @@
     </table>
 
 </sec:authorize>
+<sec:authorize access="isAnonymous()">
+    <a href="<spring:url value="/login"/>">Login</a>
+</sec:authorize>
 </body>
 </html>

@@ -14,7 +14,7 @@
 <sec:authorize access="isAuthenticated()">
   <!-- For login user -->
   <spring:url value="/login?logout" var="logoutUrl" />
-  <form action="${logoutUrl}" method="get" id="logoutForm">
+  <form action="${logoutUrl}" method="post" id="logoutForm">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </form>
 
