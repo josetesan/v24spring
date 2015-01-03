@@ -43,7 +43,7 @@ public class RegisterController {
     public String saveRegistration(@Valid User user, BindingResult result,Model model)
     {
         if (result.hasErrors()) {
-            LOGGER.warn(result.getAllErrors().get(0).toString())  ;
+            LOGGER.warn("Could not register, has {} errors",result.getErrorCount()) ;
             return "/register";
         }   else {
             Long id = userDao.saveUser(user);
@@ -57,5 +57,10 @@ public class RegisterController {
     @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Autowired
+    public void setAuthoritiesDao(AuthoritiesDao authoritiesDao) {
+        this.authoritiesDao = authoritiesDao;
     }
 }

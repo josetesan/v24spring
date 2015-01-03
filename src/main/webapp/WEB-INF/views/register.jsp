@@ -12,13 +12,14 @@
 <div class="container">
   <spring:url value="/register" var="regUrl"/>
   <form:form class="form-signin" commandName="user" action="${regUrl}" method="post">
+    <form:errors path="*" cssClass="alert alert-warning" element="div" />
     <h2 class="form-signin-heading">Please register</h2>
     <form:label path="username" for="username" class="sr-only">Username</form:label>
     <form:input path="username"  class="form-control" placeholder="User name" />
-    <form:errors cssClass="alert alert-danger .alert-dismissible" path="username"/>
+    <form:errors cssClass="alert  alert-warning" path="username"/>
     <form:label path="password" for="password" class="sr-only">Password</form:label>
     <form:password path="password"  class="form-control" placeholder="Password" />
-    <form:errors cssClass="alert alert-danger .alert-dismissible" path="password"/>
+    <form:errors cssClass="alert  alert-warning" path="password"/>
     <form:button class="btn btn-lg btn-primary btn-block" type="submit">Register</form:button>
   </form:form>
 

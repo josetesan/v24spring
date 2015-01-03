@@ -3,9 +3,11 @@ package com.ventura24.nlp2.webapp.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -41,5 +43,17 @@ public class DbConfiguration {
                 .addScript("classpath:schema.sql")
                 .addScript("classpath:data.sql")
                 .build();
+    }
+
+    @Bean
+    @Profile("dev")
+    public PlatformTransactionManager devtxManager() {
+        return new DataSourceTransactionManager(devDataSource());
+    }
+
+    @Bean
+    @Profile("production")
+    public PlatformTransactionManager prodtxManager() {
+        return new DataSourceTransactionManager(prodDataSource());
     }
 }
