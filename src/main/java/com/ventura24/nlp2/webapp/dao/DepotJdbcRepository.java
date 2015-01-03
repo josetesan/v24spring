@@ -27,7 +27,7 @@ public class DepotJdbcRepository implements DepotRepository {
 
 
     @Override
-    public List<Depot> findByUserid(Long userId) {
+    public List<Depot> findAllByUserid(Long userId) {
         return this.jdbcTemplate.query("Select * from DEPOT where user_id = ?",
                 new DepotMapper(),
                 userId);

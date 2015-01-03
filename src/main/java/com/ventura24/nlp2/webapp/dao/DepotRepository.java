@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface DepotRepository {
 
-    List<Depot> findByUserid(Long userId);
+    List<Depot> findAllByUserid(Long userId);
 }

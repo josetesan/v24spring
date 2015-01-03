@@ -40,7 +40,7 @@ public class DepotController {
                 locale));
 
         LOGGER.info("Arriving depot controller for user {}",userid);
-        final List<Depot> depots = depotRepository.findByUserid(userid);
+        final List<Depot> depots = depotRepository.findAllByUserid(userid);
         LOGGER.info("Retrieved {} depots for user {}",depots.size(),userid);
         model.addAttribute("depots",depots) ;
         return "game/depot";

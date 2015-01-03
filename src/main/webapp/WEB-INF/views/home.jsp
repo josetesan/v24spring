@@ -18,8 +18,11 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </form>
 
-  <a href="<spring:url value='/game/depot/0'/>">
-    <spring:message code="depot.title" arguments="0"/>
+  <spring:url value="game/depot/{userid}" var="depotUrl">
+    <spring:param name="userid" value="${userid}" />
+  </spring:url>
+  <a href="<spring:url value='${depotUrl}'/>">
+    <spring:message code="depot.title" arguments="${userid}"/>
   </a>
 
   <script>    function formSubmit() {      document.getElementById("logoutForm").submit();    }  </script>

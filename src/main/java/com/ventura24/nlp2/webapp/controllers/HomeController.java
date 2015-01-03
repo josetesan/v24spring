@@ -1,13 +1,11 @@
 package com.ventura24.nlp2.webapp.controllers;
 
+import com.ventura24.nlp2.webapp.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +22,10 @@ public class HomeController {
 
     private MessageSource messageSource;
 
+    private UserDetailsService userDetailsService;
+
+    private UserDao userDao;
+
     private Logger LOGGER = LoggerFactory.getLogger("HomeController");
 
     @RequestMapping(value="/", method= RequestMethod.GET)
@@ -32,14 +34,21 @@ public class HomeController {
         model.addObject("message", messageSource.getMessage("label.home.msg",null, locale));
         model.setViewName("home");
 
+        if (null != principal) {
+            Long id = userDao.findIdByUserName(principal.getName());
+            model.addObject("userid",id);
+            LOGGER.info("User {} connected with id {}",principal.getName(),id);
+        }
+        /*
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
             LOGGER.info(" success for user {}",userDetail.getUsername());
-            LOGGER.info(" success for user {}",principal.getName());
+            LOGGER.info(" success for user {}", principal.getName());
         }
+        */
 
-        LOGGER.info("Entering home");
+        LOGGER.info("Entering home ");
         return model;
     }
 
@@ -48,4 +57,11 @@ public class HomeController {
         this.messageSource = messageSource;
     }
 
+    @Autowired
+    public void setUserDetailsService(UserDetailsService userDetailsService) { this.userDetailsService = userDetailsService;}
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 }

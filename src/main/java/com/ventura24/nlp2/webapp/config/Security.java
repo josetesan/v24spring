@@ -29,10 +29,8 @@ public class Security extends WebSecurityConfigurerAdapter {
             auth
                     .jdbcAuthentication()
                     .dataSource(dataSource)
-                    .passwordEncoder(new PlaintextPasswordEncoder())
-                    .usersByUsernameQuery("SELECT USERNAME, PASSWORD , ENABLED FROM USERS WHERE USERNAME=?")
+                    .passwordEncoder(new PlaintextPasswordEncoder());
 
-            ;
         }
 
 
@@ -56,7 +54,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                         .csrf();
         }
 
-    /*
+
         @Bean(name="userDetailsService")
         public UserDetailsService userDetailsService()
         {
@@ -64,5 +62,5 @@ public class Security extends WebSecurityConfigurerAdapter {
                 userDetailsService.setDataSource(dataSource);
                 return userDetailsService;
         }
-        */
+
 }
