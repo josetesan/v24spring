@@ -47,7 +47,7 @@ public class RegisterController {
             return "/register";
         }   else {
             Long id = userDao.saveUser(user);
-            authoritiesDao.saveAuthority(user.getUsername(),"user");
+            authoritiesDao.saveAuthority(user.getName(),"user");
             LOGGER.info("Successfully saved user with id {}",id);
             model.addAttribute("msg", "You have been properly registered.Please log-in");
             return "redirect:login";

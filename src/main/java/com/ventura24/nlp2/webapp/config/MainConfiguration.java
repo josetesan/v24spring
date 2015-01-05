@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @ComponentScan(basePackages = "com.ventura24.nlp2.webapp")
-@Import({ DbConfiguration.class, Security.class ,  WebConfiguration.class, WebflowConfiguration.class})
+@Import({ DbProdConfiguration.class,DbDevConfiguration.class, Security.class ,  WebConfiguration.class, WebflowConfiguration.class})
 public class MainConfiguration {
 
 

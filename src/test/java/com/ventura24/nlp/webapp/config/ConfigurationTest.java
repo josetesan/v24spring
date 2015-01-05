@@ -1,7 +1,6 @@
 package com.ventura24.nlp.webapp.config;
 
-import com.ventura24.nlp2.webapp.config.DbConfiguration;
-import com.ventura24.nlp2.webapp.config.WebConfiguration;
+import com.ventura24.nlp2.webapp.config.DbDevConfiguration;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,13 +16,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.util.Properties;
 
 /**
  * Created by josetesan on 29/12/14.
  */
 
-@ContextConfiguration(classes = DbConfiguration.class)
+@ContextConfiguration(classes = DbDevConfiguration.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("production")

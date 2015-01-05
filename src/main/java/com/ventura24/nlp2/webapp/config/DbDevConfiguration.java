@@ -17,32 +17,14 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-public class DbConfiguration {
-
-    // JNDI
-    @Bean(name = "dataSource",destroyMethod = "")
-    @Profile("production")
-    public DataSource prodDataSource()
-    {
-        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
-        final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/nlp");
-        return dataSource;
-    }
-
-
-    @Bean(name = "loginDataSource",destroyMethod = "")
-    @Profile("production")
-    public DataSource loginDataSource()
-    {
-        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
-        final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/lm");
-        return dataSource;
-    }
+@Profile("dev")
+public class DbDevConfiguration
+{
 
     // Local dev Instance
     @Bean(name="dataSource")
-    @Profile("dev")
-    public DataSource devDataSource()
+
+    public DataSource dataSource()
     {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
@@ -54,14 +36,9 @@ public class DbConfiguration {
     }
 
     @Bean
-    @Profile("dev")
-    public PlatformTransactionManager devtxManager() {
-        return new DataSourceTransactionManager(devDataSource());
+    public PlatformTransactionManager txManager() {
+        return new DataSourceTransactionManager(dataSource());
     }
 
-    @Bean
-    @Profile("production")
-    public PlatformTransactionManager prodtxManager() {
-        return new DataSourceTransactionManager(prodDataSource());
-    }
+
 }

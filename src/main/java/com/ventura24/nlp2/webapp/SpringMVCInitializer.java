@@ -1,6 +1,6 @@
 package com.ventura24.nlp2.webapp;
 
-import com.ventura24.nlp2.webapp.config.DbConfiguration;
+import com.ventura24.nlp2.webapp.config.DbDevConfiguration;
 import com.ventura24.nlp2.webapp.config.MainConfiguration;
 import com.ventura24.nlp2.webapp.config.Security;
 import com.ventura24.nlp2.webapp.config.WebConfiguration;
@@ -13,7 +13,7 @@ public class SpringMVCInitializer extends AbstractAnnotationConfigDispatcherServ
 
         @Override
         protected Class<?>[] getRootConfigClasses() {
-            return new Class[] {MainConfiguration.class, Security.class, DbConfiguration.class, WebConfiguration.class};
+            return new Class[] {MainConfiguration.class, Security.class, DbDevConfiguration.class, WebConfiguration.class};
         }
 
         @Override

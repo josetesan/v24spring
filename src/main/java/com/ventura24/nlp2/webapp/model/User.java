@@ -1,5 +1,6 @@
 package com.ventura24.nlp2.webapp.model;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
@@ -11,34 +12,62 @@ public class User {
 
     @NotEmpty
     @Size(min=4,max=8)
-    private String username;
+    private String name;
     @NotEmpty
-    @Size(min=4,max=8)
+    @Size(min=8,max=16)
     private String password;
+
+    @NotEmpty
+    @Email
+    private String email;
+
+    @NotEmpty
+    @Size(min=9,max=9)
+    private String login;
 
     public User()
     {
 
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+
+    public String getEmail()
+    {
+        return email;
     }
 
-    public String getUsername() {
-        return username;
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getLogin()
+    {
+        return login;
     }
 
-    public String getPassword() {
+    public void setLogin(String login)
+    {
+        this.login = login;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getPassword()
+    {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password)
+    {
         this.password = password;
     }
 }

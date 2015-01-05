@@ -22,7 +22,7 @@ public class HomeController {
 
     private MessageSource messageSource;
 
-    private UserDetailsService userDetailsService;
+//    private UserDetailsService userDetailsService;
 
     private UserDao userDao;
 
@@ -57,8 +57,8 @@ public class HomeController {
         this.messageSource = messageSource;
     }
 
-    @Autowired
-    public void setUserDetailsService(UserDetailsService userDetailsService) { this.userDetailsService = userDetailsService;}
+//    @Autowired
+//    public void setUserDetailsService(UserDetailsService userDetailsService) { this.userDetailsService = userDetailsService;}
 
     @Autowired
     public void setUserDao(UserDao userDao) {

@@ -1,7 +1,9 @@
 package com.ventura24.nlp2.webapp.controllers.game;
 
 import com.ventura24.nlp2.webapp.dao.DepotRepository;
+import com.ventura24.nlp2.webapp.dao.GProductsDao;
 import com.ventura24.nlp2.webapp.model.Depot;
+import com.ventura24.nlp2.webapp.model.GProduct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class DepotController {
     private DepotRepository depotRepository;
 
     @Autowired
+    private GProductsDao gProductsDao;
+
+    @Autowired
     private MessageSource messageSource;
 
     @RequestMapping(value="/{userid}",method = RequestMethod.GET)
@@ -40,9 +45,11 @@ public class DepotController {
                 locale));
 
         LOGGER.info("Arriving depot controller for user {}",userid);
-        final List<Depot> depots = depotRepository.findAllByUserid(userid);
+//        final List<Depot> depots = depotRepository.findAllByUserid(userid);
+        final List<GProduct> depots = gProductsDao.findGProductsByUser(userid);
         LOGGER.info("Retrieved {} depots for user {}",depots.size(),userid);
         model.addAttribute("depots",depots) ;
-        return "game/depot";
+//        return "game/depot";
+        return "game/production_depot";
     }
 }
