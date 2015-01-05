@@ -32,22 +32,44 @@ public class ConfigurationTest {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private DataSource loginDataSource;
+
     @BeforeClass
     public static void createMockJndiRealm() throws Exception
     {
         SimpleNamingContextBuilder builder = new SimpleNamingContextBuilder();
-        DataSource ds = new DriverManagerDataSource("jdbc:oracle:thin:@//localhost:49161/xe","system","oracle");
-        builder.bind("java:comp/env/jdbc/MyLocalDB", ds);
+        final DataSource ds = new DriverManagerDataSource("jdbc:oracle:thin:@//db-es-06-mad.office.ventura24.es/DESA_RW","OC_JSANC","OC_JSANC");
+        builder.bind("java:comp/env/jdbc/nlp", ds);
+	final DataSource lmDs = new DriverManagerDataSource("jdbc:oracle:thin:@//db-es-06-mad.office.ventura24.es/DESA_RW","loginmodule","LOGINMODULE");
+        builder.bind("java:comp/env/jdbc/lm",lmDs);
         builder.activate();
     }
 
     @Test
-    public void testCanUseDatabase()
+    public void testCanUseMainDatabase()
     {
         try {
             Assert.assertNotNull(dataSource);
 
             Connection connection = dataSource.getConnection();
+            Assert.assertNotNull(connection);
+
+            connection.close();
+        } catch (final Throwable t)
+        {
+            Assert.fail(t.getMessage());
+        }
+
+    }
+
+    @Test
+    public void testCanUseLMDatabase()
+    {
+        try {
+            Assert.assertNotNull(loginDataSource);
+
+            Connection connection = loginDataSource.getConnection();
             Assert.assertNotNull(connection);
 
             connection.close();

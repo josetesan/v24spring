@@ -17,7 +17,6 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-
 public class DbConfiguration {
 
     // JNDI
@@ -26,8 +25,17 @@ public class DbConfiguration {
     public DataSource prodDataSource()
     {
         final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
-        final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/MyLocalDB");
+        final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/nlp");
+        return dataSource;
+    }
 
+
+    @Bean(name = "loginDataSource",destroyMethod = "")
+    @Profile("production")
+    public DataSource loginDataSource()
+    {
+        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
+        final DataSource dataSource = dsLookup.getDataSource("java:comp/env/jdbc/lm");
         return dataSource;
     }
 
