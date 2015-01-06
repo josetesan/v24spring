@@ -1,6 +1,6 @@
 package com.ventura24.nlp.webapp.config;
 
-import com.ventura24.nlp2.webapp.config.DbDevConfiguration;
+import com.ventura24.nlp2.webapp.config.production.DbProdConfiguration;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import java.sql.Connection;
  * Created by josetesan on 29/12/14.
  */
 
-@ContextConfiguration(classes = DbDevConfiguration.class)
+@ContextConfiguration(classes = DbProdConfiguration.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("production")

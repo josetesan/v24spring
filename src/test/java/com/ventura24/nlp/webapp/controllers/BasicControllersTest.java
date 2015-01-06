@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by josetesan on 30/12/14.
  */
 
-@ActiveProfiles("dev")
+
 public class BasicControllersTest {
 
 

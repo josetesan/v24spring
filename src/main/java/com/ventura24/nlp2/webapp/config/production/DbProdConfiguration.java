@@ -1,4 +1,4 @@
-package com.ventura24.nlp2.webapp.config;
+package com.ventura24.nlp2.webapp.config.production;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
