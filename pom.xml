@@ -18,10 +18,10 @@
 
 
     <properties>
-        <spring.version>4.1.4.RELEASE</spring.version>
-        <spring.security-version>4.0.0.RC1</spring.security-version>
+        <spring.version>4.1.5.RELEASE</spring.version>
+        <spring.security-version>4.0.0.RC2</spring.security-version>
         <slf4j.version>1.7.10</slf4j.version>
-        <tomcat.version>7.0.57</tomcat.version>
+        <tomcat.version>7.0.59</tomcat.version>
     </properties>
 
     <dependencies>
